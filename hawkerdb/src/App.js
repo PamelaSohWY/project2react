@@ -1,16 +1,8 @@
-import React from "react"
-import './App.css';
-
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-//import 
-import Recipes from "./Recipes"
-
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 export default function App() {
-  return (
-    <div className="container">
-    <Recipes/>
-    </div>
-  );
+  return <React.Fragment></React.Fragment>;
 }
 
+
+//based on React Lab 10 
