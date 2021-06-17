@@ -1,0 +1,19 @@
+{
+  "name": "project2react",
+  "version": "1.0.0",
+  "description": "### Github Repositories  https://github.com/PamelaSohWY/project2react/blob/main/README.md https://github.com/PamelaSohWY/project2expressmongodb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PamelaSohWY/project2react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PamelaSohWY/project2react/issues"
+  },
+  "homepage": "https://github.com/PamelaSohWY/project2react#readme"
+}

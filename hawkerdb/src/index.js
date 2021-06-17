@@ -1,17 +1,18 @@
-import {StrictMode} from 'react';
-import ReactDOM from 'react-dom';//same
-import App from './App'; //same
-import RecipeBook from './components/RecipeBook';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 
-
-const rootElement = document.getElementById("root"); 
 
 ReactDOM.render(
-  <StrictMode>
-    <RecipeBook />
-  </StrictMode>,
- rootElement
+  <React.Fragment>
+    <App />
+  </React.Fragment>,
+  document.getElementById('root')
 );
+
+
+// don't touch all
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

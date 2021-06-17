@@ -1,8 +1,15 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-export default function App() {
-  return <React.Fragment></React.Fragment>;
+import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css"
+import RecipeBook from "./components/RecipeBook.js"
+
+function App() {
+  return (
+    <div className="container container-fluid">
+      <RecipeBook/>
+    </div>
+  );
 }
 
+export default App;
 
 //based on React Lab 10 

@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"; // in node module (out of Nm into components )
 import Listing from "../components/Listing";
-import AddNew from "../components/AddNew";
+import AddNew from "../components/AddNew"; // add dots infront to represent paths //add ../
 
 export default class RecipeBook extends React.Component {
 
