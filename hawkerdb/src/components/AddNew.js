@@ -23,7 +23,7 @@ export default function AddNew(props) {
         className="form-control"
         name="newIngredients"
         value={props.newIngredients}
-        onChang={props.onUpdateFormField}
+        onChange={props.onUpdateFormField}
         // this is linked to RecipeBok
         />
     </div>

@@ -1,6 +1,9 @@
 import React from "react"; // in node module (out of Nm into components )
 import Listing from "../components/Listing";
 import AddNew from "../components/AddNew"; // add dots infront to represent paths //add ../
+import HawkerDirectory from "../components/HawkerDirectory"
+import axios from "axios"
+
 
 export default class RecipeBook extends React.Component {
 
@@ -22,6 +25,15 @@ export default class RecipeBook extends React.Component {
         newIngredients: ""
     };
 
+    // This was to check that it works 
+    // async componentDidMount(){
+    //     let response = await axios.get("https://3000-amethyst-canid-ubusltct.ws-us09.gitpod.io/locations");
+    //     console.log(response.data);
+    //     // this.setState({
+    //     //   data: response.data
+    //     // });
+    // }
+
     renderContent() {
         if (this.state.active === "listing") {
             return (
@@ -31,6 +43,18 @@ export default class RecipeBook extends React.Component {
                 </React.Fragment>
             );
         } else if (this.state.active === "add") { //where does this add comefrom
+            return (
+                <React.Fragment>
+                    <AddNew
+                        onUpdateFormField={this.updateFormField}
+                        newTitle={this.state.newTitle}
+                        newIngredients={this.state.newIngredients}
+                        onAddNew={this.addNew}
+                    //this is passed to Add New component using props
+                    />
+                </React.Fragment>
+            );
+        } else if (this.state.active === "hawkerdirectory") { //where does this add comefrom
             return (
                 <React.Fragment>
                     <AddNew
@@ -80,6 +104,7 @@ render() {
         <React.Fragment>
             <div className="container">
                 <ul className="nav nav-tabs">
+                    {/* this is for setting additional tabs */}
                     <li className="nav-item">
                         <button
                             className="nav-link active"
@@ -91,6 +116,7 @@ render() {
                             Recipes
               </button>
                     </li>
+                    {/* this is for setting additional tabs */}
                     <li className="nav-item">
                         <button
                             className="nav-link"
@@ -99,6 +125,17 @@ render() {
                             }}
                         >
                             Add New
+              </button>
+                    </li>
+                    {/* this is for setting additional tabs */}
+                    <li className="nav-item"> 
+                    <button
+                           className="nav-link"
+                            onClick={() => {
+                                this.setActive("hawkerdirectory");
+                            }}
+                        >
+                            Hawker Directory
               </button>
                     </li>
                 </ul>
