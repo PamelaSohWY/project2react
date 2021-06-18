@@ -27,7 +27,7 @@ export default function AddNew(props) {
         // this is linked to RecipeBok
         />
     </div>
-    <button className ="btn btn-primary mt-3" onClick={props.onAdd}>
+    <button className ="btn btn-primary mt-3" onClick={props.onAddNewRecipe}>
     Add New
     </button> 
    </React.Fragment>

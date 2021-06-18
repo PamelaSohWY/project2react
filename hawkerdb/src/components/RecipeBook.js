@@ -6,23 +6,27 @@ import axios from "axios"
 
 
 export default class RecipeBook extends React.Component {
+    url = "https://3000-amethyst-canid-ubusltct.ws-us08.gitpod.io/"
+   
 
     state = {
         active: "listing",
-        data: [
-            {
-                _id: 1,
-                title: "Chicken Rice",
-                ingredients: ["Chicken Broth", "Chicken", "Rice"]
-            },
-            {
-                _id: 2,
-                title: "Duck Rice",
-                ingredients: ["Duck", "Rice"]
-            },
-        ],
-        newTitle: "",
-        newIngredients: ""
+        data: [],
+        // {
+        //     _id: 1,
+        //     title: "Chicken Rice",
+        //     ingredients: ["Chicken Broth", "Chicken", "Rice"]
+        // },
+        // {
+        //     _id: 2,
+        //     title: "Duck Rice",
+        //     ingredients: ["Duck", "Rice"]
+        // },
+
+        newrecipe_name: "",
+        newingredient_part_1: "",
+        newstall_name: "",
+        newmenu_highlights: ""
     };
 
     // This was to check that it works 
@@ -33,6 +37,29 @@ export default class RecipeBook extends React.Component {
     //     //   data: response.data
     //     // });
     // }
+
+    //Function to Fetch Data 
+    fetchDataRecipes = async () => {
+        let response = await axios.get(this.url + 'recipes');
+        console.log(response.data)
+        this.setState({
+            data: response.data
+        })
+        console.log(response.data)
+    };
+    fetchDataLocation = async () => {
+        let response = await axios.get(this.url + 'locations');
+        console.log(response.data)
+        this.setState({
+            data: response.data
+        })
+        console.log(response.data)
+    };
+
+    componentDidMount() {
+        this.fetchDataRecipes();
+        this.fetchDataLocation();
+    }
 
     renderContent() {
         if (this.state.active === "listing") {
@@ -47,9 +74,9 @@ export default class RecipeBook extends React.Component {
                 <React.Fragment>
                     <AddNew
                         onUpdateFormField={this.updateFormField}
-                        newTitle={this.state.newTitle}
-                        newIngredients={this.state.newIngredients}
-                        onAddNew={this.addNew}
+                        newrecipe_name={this.state.newrecipe_name}
+                        newingredient_part_1={this.state.newingredient_part_1}
+                        onAddNewRecipe={this.AddNewRecipe}
                     //this is passed to Add New component using props
                     />
                 </React.Fragment>
@@ -57,10 +84,10 @@ export default class RecipeBook extends React.Component {
         } else if (this.state.active === "hawkerdirectory") { //where does this add comefrom
             return (
                 <React.Fragment>
-                    <AddNew
+                    <HawkerDirectory
                         onUpdateFormField={this.updateFormField}
-                        newTitle={this.state.newTitle}
-                        newIngredients={this.state.newIngredients}
+                        newstall_name={this.state.newstall_name}
+                        newmenuhighlights={this.state.newmenu_highlights}
                         onAddNew={this.addNew}
                     //this is passed to Add New component using props
                     />
@@ -82,66 +109,78 @@ export default class RecipeBook extends React.Component {
         });
     }; //end of setActive 
 
-    addNew = () => {
-        this.setState({
-            data: [
+    addNewRecipes = async () => {
+        let response = await axios.post(this.url + "recipes", {
+            recipe_name: this.state.newrecipe_name,
+            ingredient_part_1: this.state.newingredient_part_1.split(',')
+        })
+        this.set.state({
+            'data': [
                 ...this.state.data,
-                {
-                    _id: Math.floor(Math.random() * 10000),
-                    title: this.state.newTitle,
-                    ingredients: this.state.newIngredients.split(",")
-                }
+                response.data[0]
             ],
-            active: "Listing"
-        });
-    };//end of add new
+            'active': 'listing'
+        })
+    }
+
+    addNewLocations = async () => {  
+        let response = await axios.post(this.url + "locations", {
+            stall_name: this.state.newstall_name,
+            menu_highlights: this.state.menu_highlights.split(',')
+        })
+        this.set.state({
+            'data': [
+                ...this.state.data,
+                response.data[0]
+            ],
+            'active': 'listing'
+        })
+    }
 
 
-
-
-render() {
-    return (
-        <React.Fragment>
-            <div className="container">
-                <ul className="nav nav-tabs">
-                    {/* this is for setting additional tabs */}
-                    <li className="nav-item">
-                        <button
-                            className="nav-link active"
-                            aria-current="page"
-                            onClick={() => {
-                                this.setActive("listing");
-                            }}
-                        >
-                            Recipes
+    render() {
+        return (
+            <React.Fragment>
+                <div className="container">
+                    <ul className="nav nav-tabs">
+                        {/* this is for setting additional tabs */}
+                        <li className="nav-item">
+                            <button
+                                className="nav-link active"
+                                aria-current="page"
+                                onClick={() => {
+                                    this.setActive("listing");
+                                }}
+                            >
+                                Recipes
               </button>
-                    </li>
-                    {/* this is for setting additional tabs */}
-                    <li className="nav-item">
-                        <button
-                            className="nav-link"
-                            onClick={() => {
-                                this.setActive("add");
-                            }}
-                        >
-                            Add New
+                        </li>
+                        {/* this is for setting additional tabs */}
+                        <li className="nav-item">
+                            <button
+                                className="nav-link"
+                                onClick={() => {
+                                    this.setActive("add");
+                                }}
+                            >
+                                Add New
               </button>
-                    </li>
-                    {/* this is for setting additional tabs */}
-                    <li className="nav-item"> 
-                    <button
-                           className="nav-link"
-                            onClick={() => {
-                                this.setActive("hawkerdirectory");
-                            }}
-                        >
-                            Hawker Directory
+                        </li>
+                        {/* this is for setting additional tabs */}
+                        <li className="nav-item">
+                            <button
+                                className="nav-link"
+                                onClick={() => {
+                                    this.setActive("hawkerdirectory");
+                                }}
+                            >
+                                Hawker Directory
               </button>
-                    </li>
-                </ul>
-                {this.renderContent()}
-            </div>
-        </React.Fragment>
-    );
-}
+                        </li>
+                    </ul>
+                    {this.renderContent()}
+                </div>
+            </React.Fragment>
+        );
+    }
 }

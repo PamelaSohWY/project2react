@@ -9,10 +9,10 @@ export default function Listing(props) {
           <React.Fragment key={r._id}>
             <div className="card">
               <div className="card-body">
-                <h3 className="card-title">{r.title}</h3>
+                <h3 className="card-title">{r.recipe_name}</h3>
                 <h4>Ingredients</h4>
                 <ul>
-                  {r.ingredients.map((i) => (
+                  {r.ingredient_part_1.map((i) => (
                     <li key={i}>{i}</li>
                   ))}
                 </ul>
