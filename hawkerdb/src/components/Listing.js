@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Listing(props) {
+  console.log(props.data) //to test if props is passed down
   return (
     <React.Fragment>
       <div className="container">
@@ -12,9 +13,7 @@ export default function Listing(props) {
                 <h3 className="card-title">{r.recipe_name}</h3>
                 <h4>Ingredients</h4>
                 <ul>
-                  {r.ingredient_part_1.map((i) => (
-                    <li key={i}>{i}</li>
-                  ))}
+                  {r.ingredient_part_1}
                 </ul>
               </div>
             </div>

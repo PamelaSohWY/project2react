@@ -10,8 +10,8 @@ export default function AddNew(props) {
         <input
         type= 'text'
         className='form-control'
-        name='newTitle'
-        value={props.newTitle}
+        name='newrecipe_name'
+        value={props.newrecipe_name}
         onChange={props.onUpdateFormField}
         />
     </div>
@@ -21,8 +21,8 @@ export default function AddNew(props) {
         <input 
         time = 'text'
         className="form-control"
-        name="newIngredients"
-        value={props.newIngredients}
+        name="newingredient_part_1"
+        value={props.newingredient_part_1}
         onChange={props.onUpdateFormField}
         // this is linked to RecipeBok
         />

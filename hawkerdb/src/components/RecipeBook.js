@@ -11,7 +11,8 @@ export default class RecipeBook extends React.Component {
 
     state = {
         active: "listing",
-        data: [],
+        dataRecipes: [],
+        dataLocations: [], //different data sets for different collections
         // {
         //     _id: 1,
         //     title: "Chicken Rice",
@@ -41,17 +42,17 @@ export default class RecipeBook extends React.Component {
     //Function to Fetch Data 
     fetchDataRecipes = async () => {
         let response = await axios.get(this.url + 'recipes');
-        console.log(response.data)
+        console.log(response.data) //testing
         this.setState({
-            data: response.data
+            dataRecipes: response.data //
         })
         console.log(response.data)
     };
     fetchDataLocation = async () => {
         let response = await axios.get(this.url + 'locations');
-        console.log(response.data)
+        console.log(response.data)//
         this.setState({
-            data: response.data
+            dataLocations: response.data
         })
         console.log(response.data)
     };
@@ -65,7 +66,8 @@ export default class RecipeBook extends React.Component {
         if (this.state.active === "listing") {
             return (
                 <React.Fragment>
-                    <Listing data={this.state.data} />
+                    <Listing data={this.state.dataRecipes} /> 
+                    {/* make sure that the data (name of props) = the name of the data in the state */}
                     {/* will be using props to pass data  */}
                 </React.Fragment>
             );
@@ -84,13 +86,9 @@ export default class RecipeBook extends React.Component {
         } else if (this.state.active === "hawkerdirectory") { //where does this add comefrom
             return (
                 <React.Fragment>
-                    <HawkerDirectory
-                        onUpdateFormField={this.updateFormField}
-                        newstall_name={this.state.newstall_name}
-                        newmenuhighlights={this.state.newmenu_highlights}
-                        onAddNew={this.addNew}
-                    //this is passed to Add New component using props
-                    />
+                    <HawkerDirectory data={this.state.dataLocations} /> 
+                    {/* this is passed to Add New component using props */}
+                
                 </React.Fragment>
             );
         }

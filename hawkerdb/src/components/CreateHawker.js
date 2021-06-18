@@ -11,7 +11,7 @@ export default function CreateHawker(props) {
         <input
         type= 'text'
         className='form-control'
-        name='newTitle'
+        name='newstall_name'
         value={props.newstall_name} //change to new value 
         onChange={props.onUpdateFormField} // 
         />
@@ -22,13 +22,13 @@ export default function CreateHawker(props) {
         <input 
         time = 'text'
         className="form-control"
-        name="newIngredients"
+        name="newmenu_highlights"
         value={props.newmenu_highlights}
         onChange={props.onUpdateFormField}
         // this is linked to RecipeBok
         />
     </div>
-    <button className ="btn btn-primary mt-3" onClick={props.onAdd}>
+    <button className ="btn btn-primary mt-3" onClick={props.onAddNewLocations}>
     Add New
     </button> 
    </React.Fragment>
