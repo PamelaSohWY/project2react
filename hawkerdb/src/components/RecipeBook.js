@@ -6,7 +6,7 @@ import axios from "axios"
 
 
 export default class RecipeBook extends React.Component {
-    url = "https://3000-amethyst-canid-ubusltct.ws-us08.gitpod.io/"
+    url = "https://3000-amethyst-canid-ubusltct.ws-us09.gitpod.io/"
    
 
     state = {
@@ -78,7 +78,7 @@ export default class RecipeBook extends React.Component {
                         onUpdateFormField={this.updateFormField}
                         newrecipe_name={this.state.newrecipe_name}
                         newingredient_part_1={this.state.newingredient_part_1}
-                        onAddNewRecipe={this.AddNewRecipe}
+                        onAddNewRecipe={this.addNewRecipe}   //link to functions in AddNew
                     //this is passed to Add New component using props
                     />
                 </React.Fragment>
@@ -107,16 +107,15 @@ export default class RecipeBook extends React.Component {
         });
     }; //end of setActive 
 
-    addNewRecipes = async () => {
+    addNewRecipe = async () => {
         let response = await axios.post(this.url + "recipes", {
             recipe_name: this.state.newrecipe_name,
             ingredient_part_1: this.state.newingredient_part_1.split(',')
         })
-        this.set.state({
-            'data': [
-                ...this.state.data,
-                response.data[0]
-            ],
+        console.log(response) //check if response sent out
+        this.fetchDataRecipes();
+        this.setState({
+        
             'active': 'listing'
         })
     }
@@ -127,8 +126,8 @@ export default class RecipeBook extends React.Component {
             menu_highlights: this.state.menu_highlights.split(',')
         })
         this.set.state({
-            'data': [
-                ...this.state.data,
+            'dataLocations': [
+                ...this.state.dataLocations,
                 response.data[0]
             ],
             'active': 'listing'
