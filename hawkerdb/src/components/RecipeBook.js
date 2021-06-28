@@ -28,7 +28,7 @@ export default class RecipeBook extends React.Component {
         newrecipe_name: "",
         newingredient_part_1: "",
         newstall_name: "",
-        newmenu_highlights: ""
+        newmenu_highlights: []
     };
 
     // This was to check that it works 
@@ -138,7 +138,7 @@ export default class RecipeBook extends React.Component {
     addNewLocations = async () => {  
         let response = await axios.post(this.url + "locations", {
             stall_name: this.state.newstall_name,
-            menu_highlights: this.state.menu_highlights.split(',') //how to show an array?
+            menu_highlights: this.state.newmenu_highlights.split(',') //how to show an array?
         })
         console.log(response)
         this.fetchDataLocation();
