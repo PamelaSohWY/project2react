@@ -1,7 +1,8 @@
 import React from "react"; // in node module (out of Nm into components )
 import Listing from "../components/Listing";
 import AddNew from "../components/AddNew"; // add dots infront to represent paths //add ../
-import HawkerDirectory from "../components/HawkerDirectory"
+import HawkerDirectory from "../components/HawkerDirectory";
+import CreateHawker from "../components/CreateHawker";
 import axios from "axios"
 
 
@@ -91,6 +92,20 @@ export default class RecipeBook extends React.Component {
                 
                 </React.Fragment>
             );
+        } else if (this.state.active === "createhawker") { //where does this add comefrom
+            return (
+                <React.Fragment>
+                    <CreateHawker //is this reference to the file name?
+                        onUpdateFormField={this.updateFormField}
+                        newstall_name={this.state.stall_name}
+                        newmenu_highlights={this.state.menu_highlights}
+                        onAddNewLocations={this.addNewLocations}   //link to functions in AddNew
+                    //this is passed to Add New component using props
+                    />
+                    {/* this is passed to Add New component using props */}
+                
+                </React.Fragment>
+            );
         }
 
     } // end of if 
@@ -123,13 +138,11 @@ export default class RecipeBook extends React.Component {
     addNewLocations = async () => {  
         let response = await axios.post(this.url + "locations", {
             stall_name: this.state.newstall_name,
-            menu_highlights: this.state.menu_highlights.split(',')
+            menu_highlights: this.state.menu_highlights.split(',') //how to show an array?
         })
-        this.set.state({
-            'dataLocations': [
-                ...this.state.dataLocations,
-                response.data[0]
-            ],
+        console.log(response)
+        this.fetchDataLocation();
+        this.setState({
             'active': 'listing'
         })
     }
@@ -160,7 +173,7 @@ export default class RecipeBook extends React.Component {
                                     this.setActive("add");
                                 }}
                             >
-                                Add New
+                                Add New Recipe
               </button>
                         </li>
                         {/* this is for setting additional tabs */}
@@ -172,6 +185,17 @@ export default class RecipeBook extends React.Component {
                                 }}
                             >
                                 Hawker Directory
+              </button>
+                        </li>
+                        {/* this is for setting additional tabs */}
+                        <li className="nav-item">
+                            <button
+                                className="nav-link"
+                                onClick={() => {
+                                    this.setActive("createhawker");
+                                }}
+                            >
+                                Create Hawker Location
               </button>
                         </li>
                     </ul>

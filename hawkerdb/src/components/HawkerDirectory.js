@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function HawkerDirectory(props) {
-  console.log(props.dataLocations)
+  console.log(props.data)
 
 return(
     <React.Fragment>
