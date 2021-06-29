@@ -3,12 +3,13 @@ import Listing from "../components/Listing";
 import AddNew from "../components/AddNew"; // add dots infront to represent paths //add ../
 import HawkerDirectory from "../components/HawkerDirectory";
 import CreateHawker from "../components/CreateHawker";
-import axios from "axios"
+import axios from "axios";
+import CreateComments from "../components/CreateComments"
 
 
 export default class RecipeBook extends React.Component {
-    url = "https://3000-amethyst-canid-ubusltct.ws-us09.gitpod.io/"
-   
+  
+    url ="https://3000-amethyst-canid-ubusltct.ws-us08.gitpod.io/"
 
     state = {
         active: "listing",
@@ -100,9 +101,8 @@ export default class RecipeBook extends React.Component {
                         newstall_name={this.state.stall_name}
                         newmenu_highlights={this.state.menu_highlights}
                         onAddNewLocations={this.addNewLocations}   //link to functions in AddNew
-                    //this is passed to Add New component using props
                     />
-                    {/* this is passed to Add New component using props */}
+                  
                 
                 </React.Fragment>
             );
@@ -134,6 +134,19 @@ export default class RecipeBook extends React.Component {
             'active': 'listing'
         })
     }
+     
+    // //Function ofr create comments button
+    // renderRecipeReview = async (id) =>  //write api function for get recipe specific 
+    // { let response = await axios.get(this.url+"/reviews", {
+    //       //need to add in specific function here 
+    //        newcomment = this.state.newcomment, 
+    //        newcomment_contributor= this.state.newcomment_contributor
+    // })
+    // console.log(response) 
+    // this.fetchDataRecipe(this.state._id) // but this must specify specific id 
+    
+
+    // }// end of renderReview
 
     addNewLocations = async () => {  
         let response = await axios.post(this.url + "locations", {
@@ -145,12 +158,12 @@ export default class RecipeBook extends React.Component {
         this.setState({
             'active': 'listing'
         })
-    }
-
+    };
 
     render() {
         return (
             <React.Fragment>
+                
                 <div className="container">
                     <ul className="nav nav-tabs">
                         {/* this is for setting additional tabs */}
