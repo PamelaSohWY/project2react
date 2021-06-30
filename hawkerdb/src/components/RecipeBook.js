@@ -15,6 +15,7 @@ export default class RecipeBook extends React.Component {
 
     state = {
         active: "listing",
+        id: "",
         dataRecipes: [],
         dataLocations: [], //different data sets for different collections
         // {
@@ -66,6 +67,12 @@ export default class RecipeBook extends React.Component {
         this.fetchDataLocation();
     }
 
+    pageIdHandler = (id) =>{
+        this.setState({
+            id: id
+        })
+    }
+
     renderContent() {
         if (this.state.active === "listing") {
             return (
@@ -73,6 +80,7 @@ export default class RecipeBook extends React.Component {
                     <Listing data={this.state.dataRecipes} /> 
                     {/* make sure that the data (name of props) = the name of the data in the state */}
                     {/* will be using props to pass data  */}
+                    <RecDetail id={this.state.id}/>
                 </React.Fragment>
             );
         } else if (this.state.active === "add") { //where does this add comefrom

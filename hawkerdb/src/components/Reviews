@@ -1,0 +1,95 @@
+import React from "react"
+import axios from "axios"
+
+
+
+export default class Reviews extends React.Component{
+url = "https://3000-amethyst-canid-ubusltct.ws-us08.gitpod.io/";
+
+state = {
+    active:"recipereview",
+    dataReviews:[],
+ 
+    newcontributor_id:"",
+    newreview_contributor:"",
+    newreview_title:"",
+    newrecipe_id:"",
+    newlocation_id:"",
+    newreview:"",
+    newdate:""
+};
+
+updateFormField = (event) => {
+this.setState({
+    [event.target.name] : event.target.value
+});
+};
+
+addNew= async () => {
+let response1 = await axios.post(this.url +"location"+ {location_id}, {
+    review_title : this.state.newReviewTitle
+} )
+ 
+};
+
+
+//Lifecycle Import 
+async componentDidMount(){
+    let response = await axios.get(url +"/recipe/reviews"+"location_id" );
+    this.setState({
+        reviewslist:response.data.reverse()
+    })
+}
+
+//Render Comments specific to Hawker or Recipe 
+renderReviewContent(){
+if (this.state.active === "recipereview")
+return(
+    <React.Fragment>
+        <HawkerReview 
+        data={this.state}
+
+        />
+    </React.Fragment>
+)
+}
+
+import React from "react"
+
+export default function CreateComments(props) {
+    return (
+        <React.Fragment>
+        {/* Create Form Field */}
+        <h1>Add New Comments</h1>
+        <div>
+        <input
+        type= 'text'
+        className='form-control'
+        name='newcomment_contributor'
+        value={props.newcomment_contributor}
+        onChange={props.onUpdateFormField}
+        />
+        </div> 
+        <div>
+        <div className="label">New Comment</div>
+        <input
+        type= 'text'
+        className='form-control'
+        name='newcomment'
+        value={props.newcomment}
+        onChange={props.onUpdateFormField}
+        />
+        </div>
+
+        <button className ="btn btn-primary mt-3" onClick={props.onAddNewRecipe}> 
+    Add New
+    </button> 
+        
+
+
+        </React.Fragment>
+    )
+}
+
+
+}// end of comments component 
