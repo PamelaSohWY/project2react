@@ -4,12 +4,14 @@ import AddNew from "../components/AddNew"; // add dots infront to represent path
 import HawkerDirectory from "../components/HawkerDirectory";
 import CreateHawker from "../components/CreateHawker";
 import axios from "axios";
-import CreateComments from "../components/CreateComments"
+// import CreateComments from "./CreateReview";
+// import RecipePage from "../components/RecipePage"
 
 
 export default class RecipeBook extends React.Component {
   
     url ="https://3000-amethyst-canid-ubusltct.ws-us08.gitpod.io/"
+   
 
     state = {
         active: "listing",
@@ -83,6 +85,7 @@ export default class RecipeBook extends React.Component {
                         onAddNewRecipe={this.addNewRecipe}   //link to functions in AddNew
                     //this is passed to Add New component using props
                     />
+
                 </React.Fragment>
             );
         } else if (this.state.active === "hawkerdirectory") { //where does this add comefrom
@@ -102,7 +105,7 @@ export default class RecipeBook extends React.Component {
                         newmenu_highlights={this.state.menu_highlights}
                         onAddNewLocations={this.addNewLocations}   //link to functions in AddNew
                     />
-                  
+                  {/* render content  */}
                 
                 </React.Fragment>
             );
@@ -134,6 +137,13 @@ export default class RecipeBook extends React.Component {
             'active': 'listing'
         })
     }
+
+    // addNewCommments = async () => {
+    //     let response = await axios.post(this.url + this.state.location/recipe/ +  "recipes", {
+    //         recipe_name: this.state.newrecipe_name,
+    //         ingredient_part_1: this.state.newingredient_part_1.split(',')
+    //     })
+    // }
      
     // //Function ofr create comments button
     // renderRecipeReview = async (id) =>  //write api function for get recipe specific 
@@ -214,6 +224,8 @@ export default class RecipeBook extends React.Component {
                     </ul>
                     {this.renderContent()}
                 </div>
+
+                {/* call instance here */}
             </React.Fragment>
         );
     }
