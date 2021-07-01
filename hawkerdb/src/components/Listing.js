@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export default function Listing(props) {
   console.log(props.dataRecipes) //to test if props is passed down
   return (

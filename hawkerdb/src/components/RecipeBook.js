@@ -11,7 +11,7 @@ import axios from "axios";
 export default class RecipeBook extends React.Component {
   
     url ="https://3000-amethyst-canid-ubusltct.ws-us08.gitpod.io/"
-   
+   //remember to change this https://tgc12project2pswy.herokuapp.com/
 
     state = {
         active: "listing",
@@ -77,7 +77,7 @@ export default class RecipeBook extends React.Component {
         if (this.state.active === "listing") {
             return (
                 <React.Fragment>
-                    <Listing data={this.state.dataRecipes} /> 
+                    <Listing data={this.state.dataRecipes} pageIdHandler={this.state.pageIdHandler} /> 
                     {/* make sure that the data (name of props) = the name of the data in the state */}
                     {/* will be using props to pass data  */}
                     <RecDetail id={this.state.id}/>
