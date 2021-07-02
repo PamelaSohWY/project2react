@@ -3,18 +3,22 @@ import HawkerListings from "../components/HawkerListings";
 import RecipeListings from "../components/RecipeListings";
 import AddRecipe from "../components/AddRecipe";
 import AddHawker from "../components/AddHawker";
+import HawkerPage from "./HawkerPage";
+import RecipePage from"./RecipePage"
 
 
 export default class Main extends React.Component {
   //Declare state
   state = {
-    active: "hawkerlistings"
+    active: "hawkerlistings",
+    id:""
   };
 
   //Set Page as Active
-  setActive = (page) => {
+  setActive = (page, id = "") => {
     this.setState({
-      active: page
+      active: page,
+      id: id
     });
   };
 
@@ -22,10 +26,11 @@ export default class Main extends React.Component {
     if (this.state.active === "hawkerlistings") {
       return (
         <React.Fragment>
-          <HawkerListings />
+          <HawkerListings setActive ={this.setActive} />
         </React.Fragment>
       );
     } else if (this.state.active === "addhawkers") {
+      console.log(1);
       return (
         <React.Fragment>
           <AddHawker setActive={this.setActive} />
@@ -43,8 +48,20 @@ export default class Main extends React.Component {
           <AddRecipe setActive={this.setActive} />
         </React.Fragment>
       );
-    };//end of renderContent
+    }
+    
+    else if (this.state.active === "onehawker") {
+      return (
+        <React.Fragment>
+        <HawkerPage setActive ={this.setActive} id={this.state.id}/>
+      </React.Fragment>
+      );
+    }
+    
+    
+    ;//end of renderContent
   };
+
   render() {
     return (
       <React.Fragment>
@@ -65,7 +82,7 @@ export default class Main extends React.Component {
               <button
                 className="nav-link"
                 onClick={() => {
-                  this.setActive("addhawker");
+                  this.setActive("addhawkers");
                 }}
               >
                 Add Hawker
