@@ -11,11 +11,21 @@ export default class HawkerListing extends React.Component {
 
   //Get the data
 
-  renderRecipeReview = async (id) => {
+  renderHawkerReview = async (id) => {
     this.props.setActive("onehawker", id)
 
   };
   
+editHawker = async (id) => {
+  let response =await axios.get(this.url + "locations" + id)
+  console.log(response)
+  let response2 = await axios.put(this.url + "locations" + id)
+  let response3 = await axios.get(this.url + "locations")
+  this.setState({
+    data: response3.data.reverse()
+  });
+};
+
   addNewLocations = async () => {  
     let response = await axios.post(this.url + "locations", {
         stall_name: this.state.newstall_name,
@@ -24,6 +34,17 @@ export default class HawkerListing extends React.Component {
     console.log(response)
     this.props.setActive("hawkerlistings");
 };
+
+deleteHawker = async (id) =>  {
+  
+  //delete from Hawker
+  let response = await axios.delete(this.url + "locations/"+ id) //call specific
+  console.log(response)
+  response = await axios.get(this.url + "locations") //retrieve database
+  this.setState({
+    data: response.data.reverse()
+  });
+}
 
   //Render
   render() {
@@ -39,9 +60,9 @@ export default class HawkerListing extends React.Component {
                   <h4>Menu Highlights</h4>
                      {h.menu_highlights}
 
-                     <button className="btn btn-primary mt-3 mr-1" onClick={() => this.renderRecipeReview(h._id)}>Review</button> 
-                <button className="btn btn-primary mt-3" onClick={this.EditRecipe}>Edit</button> 
-                <button className="btn btn-primary mt-3" onClick={this.DeleteRecipe}>Delete</button> 
+                     <button className="btn btn-primary mt-3 mr-1" onClick={() => this.renderHawkerReview(h._id)}>Review</button> 
+                <button className="btn btn-primary mt-3" onClick={this.editHawker(h._id)}>Edit</button> 
+                <button className="btn btn-primary mt-3" onClick={() => this.deleteHawker(h._id)}>Delete</button> 
                 </div>
               </div>
             </React.Fragment>

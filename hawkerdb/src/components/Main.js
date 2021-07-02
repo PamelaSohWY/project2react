@@ -3,8 +3,8 @@ import HawkerListings from "../components/HawkerListings";
 import RecipeListings from "../components/RecipeListings";
 import AddRecipe from "../components/AddRecipe";
 import AddHawker from "../components/AddHawker";
-import HawkerPage from "./HawkerPage";
-import RecipePage from"./RecipePage"
+import HawkerPage from "../components/HawkerPage";
+import EditHawker from "../components/EditHawker"
 
 
 export default class Main extends React.Component {
@@ -54,6 +54,14 @@ export default class Main extends React.Component {
       return (
         <React.Fragment>
         <HawkerPage setActive ={this.setActive} id={this.state.id}/>
+      </React.Fragment>
+      );
+    }
+
+    else if (this.state.active === "edithawker") {
+      return (
+        <React.Fragment>
+        <EditHawker setActive ={this.setActive} id={this.state.id}/>
       </React.Fragment>
       );
     }

@@ -28,7 +28,7 @@ export default class HawkerListing extends React.Component {
         let response = await axios.get(this.url + "locations?_id=" + this.props.id);   // this is not working
         // let response = await axios.get(this.url + "locations"); 
         this.setState({
-          data: response.data[0]
+          data: response.data[0] // call a single example
         });
       }
   }//end of Listing 
