@@ -1,0 +1,26 @@
+import React from "react";
+import axios from "axios";
+
+export default class SearchBar extends React.Component{
+    url = " https://8080-amethyst-canid-ubusltct.ws-us11.gitpod.io/"
+
+    state = {
+      data =[]
+    };
+
+render() {
+return(
+    <React.Fragment>
+        <div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <form class="form-inline" action="/action_page.php">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <button class="btn btn-success" type="submit">Search</button>
+  </form>
+ 
+</nav>
+</div>
+    </React.Fragment>
+)// end 
+};// end of render 
+} //end of SearchBar Class
